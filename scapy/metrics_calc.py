@@ -51,8 +51,12 @@ class InterArrival(Metrics):
             return
 
         inter_arrival = recv_time - self.last_recv
+        # ease packets lost
+        if inter_arrival > 33554 * 2:
+            self.last_recv = recv_time
+            return
+
         self.update(inter_arrival)
-        
         self.last_recv = recv_time
 
 
