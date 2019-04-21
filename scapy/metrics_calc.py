@@ -83,7 +83,7 @@ def get_time(packet):
 
 
 if __name__ == '__main__':
-    pcap_dir = "/home/chenwh/Workspace/Data"
+    pcap_dir = "/home/chenwh/Workspace/data"
     pcap_path = os.path.join(pcap_dir, sys.argv[1]+".pcap")
     pcaps = rdpcap(pcap_path)
 
