@@ -54,17 +54,17 @@ if __name__ == '__main__':
             send_time, recv_time = get_time(packet)
             nrt_jitters.calc(send_time, recv_time)
 
-    x = range(0, 9800)
+    x = range(0, 9900)
     plt.figure(1)
     plt.subplot(1, 2, 1)
-    plt.plot(x, rt_jitters.jitters[:9800], color="r", linestyle="-")
-    plt.ylim(0, 100000)
+    plt.plot(x, rt_jitters.jitters[:9900], color="r", linestyle="-")
+    plt.ylim(0, 130000)
     plt.xlabel("Packets")
     plt.ylabel("Jitter(us)")
 
     plt.subplot(1, 2, 2)
-    plt.plot(x, nrt_jitters.jitters[:9800], linestyle="-")
-    plt.ylim(0, 100000)
+    plt.plot(x, nrt_jitters.jitters[:9900], linestyle="-")
+    plt.ylim(0, 130000)
     plt.xlabel("Packets")
     plt.ylabel("Jitter(us)")
 
