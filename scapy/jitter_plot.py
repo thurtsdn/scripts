@@ -7,6 +7,7 @@ import os
 import sys
 from scapy.all import *
 import matplotlib.pyplot as plt
+import pylab as mpl
 
 class Jitters(object):
     def __init__(self):
@@ -41,6 +42,8 @@ if __name__ == '__main__':
     rt_pcaps = rdpcap(rt_pcap_path)
     nrt_pcaps = rdpcap(nrt_pcap_path)
 
+    mpl.rcParams['font.sans-serif'] = ['SimSun']
+
     rt_jitters = Jitters()
     nrt_jitters = Jitters()
 
@@ -54,19 +57,19 @@ if __name__ == '__main__':
             send_time, recv_time = get_time(packet)
             nrt_jitters.calc(send_time, recv_time)
 
-    x = range(0, 9900)
+    x = range(0, 9800)
     plt.figure(1)
     plt.subplot(1, 2, 1)
-    plt.plot(x, rt_jitters.jitters[:9900], color="r", linestyle="-")
-    plt.ylim(0, 130000)
-    plt.xlabel("Packets")
-    plt.ylabel("Jitter(us)")
+    plt.plot(x, rt_jitters.jitters[:9800], label=u"实时性扩展转发", color="r", marker="|", linestyle="-", linewidth=0.5)
+    plt.ylim(0, 100000)
+    plt.xlabel(u"数据包个数")
+    plt.ylabel(u"抖动值(us)")
 
     plt.subplot(1, 2, 2)
-    plt.plot(x, nrt_jitters.jitters[:9900], linestyle="-")
-    plt.ylim(0, 130000)
-    plt.xlabel("Packets")
-    plt.ylabel("Jitter(us)")
+    plt.plot(x, nrt_jitters.jitters[:9800], label=u"一般路由转发", marker="|", linestyle="-", linewidth=0.5)
+    plt.ylim(0, 100000)
+    plt.xlabel(u"数据包个数")
+    plt.ylabel(u"抖动值(us)")
 
     plt.show()
 
