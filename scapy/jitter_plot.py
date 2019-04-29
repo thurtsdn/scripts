@@ -42,7 +42,8 @@ if __name__ == '__main__':
     rt_pcaps = rdpcap(rt_pcap_path)
     nrt_pcaps = rdpcap(nrt_pcap_path)
 
-    mpl.rcParams['font.sans-serif'] = ['SimSun']
+    mpl.rcParams['font.sans-serif'] = ['SimHei']
+    mpl.rcParams['font.family']='sans-serif'
 
     rt_jitters = Jitters()
     nrt_jitters = Jitters()
@@ -57,19 +58,21 @@ if __name__ == '__main__':
             send_time, recv_time = get_time(packet)
             nrt_jitters.calc(send_time, recv_time)
 
-    x = range(0, 9800)
+    x = range(0, 9752)
     plt.figure(1)
     plt.subplot(1, 2, 1)
-    plt.plot(x, rt_jitters.jitters[:9800], label=u"实时性扩展转发", color="r", marker="|", linestyle="-", linewidth=0.5)
-    plt.ylim(0, 100000)
+    plt.plot(x, rt_jitters.jitters[:9752], color="r", linestyle="-", linewidth=0.5)
+    plt.ylim(0, 180000)
     plt.xlabel(u"数据包个数")
     plt.ylabel(u"抖动值(us)")
+    plt.title(u"实时性扩展转发抖动值变化")
 
     plt.subplot(1, 2, 2)
-    plt.plot(x, nrt_jitters.jitters[:9800], label=u"一般路由转发", marker="|", linestyle="-", linewidth=0.5)
-    plt.ylim(0, 100000)
+    plt.plot(x, nrt_jitters.jitters[:9752], linestyle="-", linewidth=0.5)
+    plt.ylim(0, 180000)
     plt.xlabel(u"数据包个数")
     plt.ylabel(u"抖动值(us)")
+    plt.title(u"一般路由转发抖动值变化")
 
     plt.show()
 
